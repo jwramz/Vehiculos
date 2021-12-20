@@ -1,0 +1,29 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using AIVA.Modelos.Models
+
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+
+<div class="row border-bottom">
+    <nav class="navbar navbar-static-top" role="navigation" style="margin-bottom: 0; ">
+        <div class="navbar-header">
+            <a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#"><i class="fa fa-bars"></i> </a>
+        </div>
+        <ul class="nav navbar-top-links navbar-right">
+            <li class="dropdown">
+
+
+            </li>
+            <li style="padding: 20px">
+                <span class="m-r-sm text-muted welcome-message">@User.Identity.Name</span>
+            </li>
+           
+            <li>
+                <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+                    <i class="fa fa-sign-out"></i>   <button type="submit" class="nav-link btn btn-link ">Salir</button>
+                </form>
+            </li>
+
+        </ul>
+    </nav>
+</div>

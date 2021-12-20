@@ -1,0 +1,61 @@
+﻿@model AIVA.Web.ViewModels.CatalogosViewModel
+
+
+<div class="container-fluid">
+    <div class="row mb-2">
+        <div class="col-sm-6">
+            <h1>Catálogos</h1>
+        </div>
+        <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+                <li class="breadcrumb-item active">Color del vehículo</li>
+                <li class="breadcrumb-item active">Editar color</li>
+            </ol>
+        </div>
+    </div>
+</div>
+
+<div class="card card-secondary">
+    <div class="card-header">
+        <h3 class="card-title">Datos del color del vehículo</h3>
+    </div>
+    <!-- /.card-header -->
+    <div class="card-body">
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+            @Html.HiddenFor(model => model.id, new { id = "idColor" })
+            <form>
+                @Html.ValidationSummary(false)
+
+                <div class="form-group row">
+                    <label class="control-label col-md-4">Color del vehículo</label>
+                    <div class="col-md-4">
+                        @Html.EditorFor(model => model.Descripcion, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Descripcion)
+                    </div>
+                </div>
+
+                <br />
+
+                @*<div class="form-group row">
+                    <label class="control-label col-md-4"></label>
+                    <div class="col-md-6">
+                        <small>Todos los campos marcados con <span class="required"><font color="red">*</font></span> son requeridos.</small>
+                    </div>
+                </div>
+                <br />*@
+
+                <div class="form-group row">
+                    <div class="offset-4 col-md-8">
+                        <input type="submit" value="Guardar" class="btn btn-success" />
+                        @Html.ActionLink("Cancelar", "Index", new { }, new { @class = "btn btn-primary" })
+                    </div>
+                </div>
+            </form>
+        }
+
+    </div>
+    <!-- /.card-body -->
+</div>
+

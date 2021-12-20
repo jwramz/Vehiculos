@@ -1,0 +1,130 @@
+﻿@page
+@model LoginModel
+
+@{
+    ViewData["Title"] = "Acceso a la aplicación";
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] AIVA - Agencia de Investigación a Vehículos Automotores</title>
+
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+
+    <!-- Google Font: Source Sans Pro -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+
+    <!-- IonIcons -->
+    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="~/plugins/fontawesome-free/css/all.min.css">
+
+    <!-- Theme style -->
+    <link rel="stylesheet" href="~/dist/css/adminlte.min.css">
+</head>
+<body style="background-color: #f4f6f9;">
+
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+
+    <div class="wrapper">
+        <div class="agrupador-contenido-login">
+
+            <hr />
+
+
+            <div class="row ">
+
+                <div class="col-md-6 text-center">
+
+                    <h2 class="font-bold">Bienvenido al sistema AIVA</h2>
+
+                    <p>
+                        <strong>Esta sección es para ingreso al sistema</strong>
+                    </p>
+
+                    <p>
+                        Solo está permitido el acceso a usuarios autorizados
+                    </p>
+
+
+                </div>
+                <div class="col-md-6">
+
+                    <form id="account" method="post">
+
+                        <div asp-validation-summary="All" class="text-danger"></div>
+                        <div class="form-group">
+                            <label asp-for="Input.Email"></label>
+                            <input asp-for="Input.Email" class="form-control" />
+                            <span asp-validation-for="Input.Email" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Input.Password"></label>
+                            <input asp-for="Input.Password" class="form-control" />
+                            <span asp-validation-for="Input.Password" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <div class="checkbox">
+                                <label asp-for="Input.RememberMe">
+                                    <input asp-for="Input.RememberMe" />
+                                    @Html.DisplayNameFor(m => m.Input.RememberMe)
+                                </label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-primary">Acceder</button>
+                        </div>
+                        <div class="form-group">
+                            <p>
+                                <a id="forgot-password" asp-page="./ForgotPassword">Olvidaste tu contraseña?</a>
+                            </p>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <hr />
+            <div class="row">
+                <div class="col-md-6">
+                    <small> AIVA - Agencia de  Investigación de vehículos Automotores</small>
+                </div>
+                <div class="col-md-6 text-right">
+                    <small>v0.0.1 - @Html.Raw(DateTime.Today.ToString("dd") + " de " + DateTime.Today.ToString("MMMM") + " de " + DateTime.Today.ToString("yyyy") + " " + DateTime.Now.ToString("hh:mm:ss tt"))</small>
+                </div>
+            </div>
+
+
+
+        </div>
+    </div>
+
+    <!-- REQUIRED SCRIPTS -->
+    <!-- jQuery -->
+    <script src="~/plugins/jquery/jquery.min.js"></script>
+    <!-- Bootstrap -->
+    <script src="~/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- AdminLTE -->
+    <script src="~/dist/js/adminlte.js"></script>
+
+    <!-- OPTIONAL SCRIPTS -->
+    <script src="~/plugins/chart.js/Chart.min.js"></script>
+
+
+</body>
+</html>
+
+
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

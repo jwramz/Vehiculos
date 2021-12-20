@@ -1,0 +1,21 @@
+﻿@if (TempData["Mensaje"] != null)
+{
+    <script src="~/plugins/toastr/toastr.min.js"></script>
+    <script type="text/javascript">
+        var tipoMensaje = '@TempData["TipoMensaje"]';
+        switch (tipoMensaje.toLowerCase()) {
+            case 'success':
+                toastr.success('@TempData["Mensaje"]', '@TempData["Titulo"]', { timeOut: 5000, positionClass: "toast-top-full-width" });
+                break;
+            case 'info':
+                toastr.info('@TempData["Mensaje"]', '@TempData["Titulo"]', { timeOut: 5000, positionClass: "toast-top-full-width" });
+                break;
+            case 'warning':
+                toastr.warning('@TempData["Mensaje"]', '@TempData["Titulo"]', { timeOut: 5000, positionClass: "toast-top-full-width" });
+                break;
+            case 'error':
+                toastr.error('@TempData["Mensaje"]', '@TempData["Titulo"]', { timeOut: 5000, positionClass: "toast-top-full-width" });
+                break;
+        }
+    </script>
+}

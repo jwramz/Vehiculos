@@ -1,0 +1,238 @@
+﻿<!--<aside class="main-sidebar sidebar-dark-primary elevation-4">-->
+<!-- Brand Logo -->
+<!--<a href="~/Admin/Inicio" class="brand-link text-center">
+    <span class="brand-text font-weight-light">@Html.Raw("&nbsp;&nbsp;&nbsp&nbsp;&nbsp;&nbsp") AIVA</span>
+</a>-->
+<!-- Sidebar -->
+<!--<div class="sidebar">-->
+<!-- Sidebar user panel (optional) -->
+<!-- Sidebar Menu -->
+<!--<nav class="mt-2">
+    <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+
+        <li class="nav-item">
+            <a asp-area="Admin" asp-controller="Cliente" asp-action="Index" class="nav-link">
+                <i class="nav-icon fas fa-user"></i>
+                <p>
+                    Clientes
+                </p>
+            </a>
+        </li>
+
+        <li class="nav-item">
+            <a asp-area="Admin" asp-controller="Vehiculos" asp-action="Create" class="nav-link">
+                <i class="nav-icon fas fa-car"></i>
+                <p>
+                    Nueva Captura
+                </p>
+            </a>
+        </li>
+
+        <li class="nav-item">
+            <a asp-area="Admin" asp-controller="Vehiculos" asp-action="Index" class="nav-link">
+                <i class="nav-icon fas fa-sticky-note"></i>
+                <p>
+                    Bitacora
+                </p>
+            </a>
+        </li>
+
+        <li class="nav-item">
+            <a asp-area="Admin" asp-controller="Vehiculos" asp-action="Index" class="nav-link">
+                <i class="nav-icon fas fa-check"></i>
+                <p>
+                    Resultados
+                </p>
+            </a>
+        </li>
+
+        <li class="nav-item">
+            <a asp-area="Admin" asp-controller="Vehiculos" asp-action="Index" class="nav-link">
+                <i class="nav-icon fas fa-registered"></i>
+                <p>
+                    5 Digitos
+                </p>
+            </a>
+        </li>
+
+        <li class="nav-item">
+            <a href="#" class="nav-link">
+                <i class="nav-icon fas fa-tools"></i>
+                <p>
+                   Catálogos
+                    <i class="right fas fa-angle-left"></i>
+                </p>
+            </a>
+            <ul class="nav nav-treeview">
+                <li class="nav-item">
+                    <a asp-area="Admin" asp-controller="Oficinas" asp-action="Index" class="nav-link">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>Oficinas</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a asp-area="Admin" asp-controller="Estados" asp-action="Index" class="nav-link">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>Estados</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a asp-area="Admin" asp-controller="Municipios" asp-action="Index" class="nav-link">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>Municipios</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a asp-area="Admin" asp-controller="Marcas" asp-action="Index" class="nav-link">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>Marcas de auto</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a asp-area="Admin" asp-controller="Modelos" asp-action="Index" class="nav-link">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>Modelos de auto</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a asp-area="Admin" asp-controller="AModelo" asp-action="Index" class="nav-link">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>Año del modelo</p>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a asp-area="Admin" asp-controller="ColorVehiculo" asp-action="Index" class="nav-link">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>Color del vehículo</p>
+                    </a>
+                </li>
+            </ul>
+        </li>
+
+    </ul>
+</nav>-->
+<!-- /.sidebar-menu -->
+<!--</div>-->
+<!-- /.sidebar -->
+<!--</aside>-->
+
+
+<nav class="navbar-default navbar-static-side" role="navigation">
+    <div class="sidebar-collapse">
+        <ul class="nav metismenu" id="side-menu">
+            <li class="nav-header">
+                <div class="dropdown profile-element text-center">
+                    
+                    <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                        AIVA
+                    </a>
+                    
+                </div>
+                <div class="logo-element">
+                    IN+
+                </div>
+            </li>
+
+            <li class="nav-item">
+                <a asp-area="Admin" asp-controller="Cliente" asp-action="Index" class="nav-link">
+                    <i class="fa fa-user"></i>
+
+                    Clientes
+
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a asp-area="Admin" asp-controller="Vehiculos" asp-action="Create" class="nav-link">
+                    <i class="fa  fa-car"></i>
+
+                    Nueva Captura
+
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a asp-area="Admin" asp-controller="Vehiculos" asp-action="Index" class="nav-link">
+                    <i class="fa fa-sticky-note"></i>
+
+                    Bitacora
+
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a asp-area="Admin" asp-controller="Vehiculos" asp-action="Index" class="nav-link">
+                    <i class="fa  fa-check"></i>
+
+                    Resultados
+
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a asp-area="Admin" asp-controller="Vehiculos" asp-action="Index" class="nav-link">
+                    <i class="fa fa-registered"></i>
+
+                    5 Digitos
+
+                </a>
+            </li>
+
+
+            <li>
+                <a href="#"><i class="fa fa-files-o"></i> <span class="nav-label">Catálogos</span><span class="fa arrow"></span></a>
+                <ul class="nav nav-second-level collapse">
+                    <li class="nav-item">
+                        <a asp-area="Admin" asp-controller="Oficinas" asp-action="Index" class="nav-link">
+                            <i class="fa fa-circle nav-icon"></i>
+                            Oficinas
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a asp-area="Admin" asp-controller="Estados" asp-action="Index" class="nav-link">
+                            <i class="fa fa-circle nav-icon"></i>
+                            Estados
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a asp-area="Admin" asp-controller="Municipios" asp-action="Index" class="nav-link">
+                            <i class="fa fa-circle nav-icon"></i>
+                            Municipios
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a asp-area="Admin" asp-controller="Marcas" asp-action="Index" class="nav-link">
+                            <i class="fa fa-circle nav-icon"></i>
+                            Marcas de auto
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a asp-area="Admin" asp-controller="Modelos" asp-action="Index" class="nav-link">
+                            <i class="fa fa-circle nav-icon"></i>
+                            Modelos de auto
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a asp-area="Admin" asp-controller="AModelo" asp-action="Index" class="nav-link">
+                            <i class="fa fa-circle nav-icon"></i>
+                            Año del modelo
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a asp-area="Admin" asp-controller="ColorVehiculo" asp-action="Index" class="nav-link">
+                            <i class="fa fa-circle nav-icon"></i>
+                            Color del vehículo
+                        </a>
+                    </li>
+                </ul>
+            </li>
+
+
+
+
+        </ul>
+
+    </div>
+</nav>
