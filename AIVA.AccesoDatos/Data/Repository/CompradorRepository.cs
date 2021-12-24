@@ -104,5 +104,22 @@ namespace AIVA.AccesoDatos.Data.Repository
                 return 0;
             }
         }
+
+
+        public List<Comprador> GetCompradorByNombre(string nombre)
+        {
+            try
+            {
+                List<Comprador> _comprador= new List<Comprador>();
+                _comprador = _db.Comprador.Where(x => x.Nombre.Contains(nombre)).ToList();
+                return _comprador;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                return new List<Comprador>();
+            }
+        }
+
     }
 }

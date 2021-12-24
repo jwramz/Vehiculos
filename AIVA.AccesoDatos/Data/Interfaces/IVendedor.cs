@@ -18,5 +18,7 @@ namespace AIVA.AccesoDatos.Data.Interfaces
         bool Update(Vendedor cliente);
 
         int RegistraVendedor(Vendedor model);
+
+        List<Vendedor> GetVendedoresByNombre(string nombre);
     }
 }

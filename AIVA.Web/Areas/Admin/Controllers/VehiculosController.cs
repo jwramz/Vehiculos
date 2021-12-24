@@ -27,7 +27,10 @@ namespace AIVA.Web.Areas.Admin.Controllers
         [HttpGet]
         public IActionResult Index()
         {
-            return View();
+            VehiculoViewModel vehiculo = new VehiculoViewModel();
+            vehiculo.listaVehiculos = _contenedorTrabajo.Vehiculo.GetVehiculos();
+
+            return View(vehiculo);
         }
 
         [HttpGet]
@@ -52,6 +55,8 @@ namespace AIVA.Web.Areas.Admin.Controllers
         public IActionResult Create(VehiculoViewModel model)
         {
             model.datosVehiculo = new Modelos.Models.Vehiculo();
+
+            model.datosVehiculo.FechaRegistro = model.FechaRegistroAgencia;
 
             model.datosVehiculo.Marca = model.Marca;
             model.datosVehiculo.idMarca = model.idMarca;
@@ -88,11 +93,48 @@ namespace AIVA.Web.Areas.Admin.Controllers
             model.datosVehiculo.NumeroResponsiva = model.NumeroResponsiva;
             model.datosVehiculo.LugarRevision = model.LugarRevision;
             model.datosVehiculo.UsuarioRegistro = model.UsuarioRegistro;
-            model.datosVehiculo.Ficha = model.Ficha;
-
-            _contenedorTrabajo.Vehiculo.Create(model.datosVehiculo);
+                                
+            
+            bool resultado =  _contenedorTrabajo.Vehiculo.Create(model.datosVehiculo);
             _contenedorTrabajo.Save();
-            return View();
+
+
+            if (resultado)
+            {
+                TempData["Titulo"] = "Nueva captura";
+                TempData["Mensaje"] = "Datos registrados con éxito";
+                TempData["TipoMensaje"] = "success";
+
+                model.listaColores = _contenedorTrabajo.Vehiculo.GetListaColorVehiculo();
+                model.listaEstados = _contenedorTrabajo.Vehiculo.GetListaEstados();
+                model.listaAModelos = _contenedorTrabajo.Vehiculo.GetListaAModelo();
+                model.listaMarcas = _contenedorTrabajo.Vehiculo.GetListaMarcas();
+                model.listaModelosAutos = _contenedorTrabajo.Vehiculo.GetListaModelos();
+                model.listaMunicipios = _contenedorTrabajo.Vehiculo.GetListaMunicipios();
+                model.listaOficinas = _contenedorTrabajo.Oficina.GetListaOficinas();
+
+                model.FechaRegistroAgencia = DateTime.Now;
+            }
+            else
+            {
+                TempData["Titulo"] = "Nueva captura";
+                TempData["Mensaje"] = "Error en el registro de los datos del vehiculo";
+                TempData["TipoMensaje"] = "warning";
+
+                model.listaColores = _contenedorTrabajo.Vehiculo.GetListaColorVehiculo();
+                model.listaEstados = _contenedorTrabajo.Vehiculo.GetListaEstados();
+                model.listaAModelos = _contenedorTrabajo.Vehiculo.GetListaAModelo();
+                model.listaMarcas = _contenedorTrabajo.Vehiculo.GetListaMarcas();
+                model.listaModelosAutos = _contenedorTrabajo.Vehiculo.GetListaModelos();
+                model.listaMunicipios = _contenedorTrabajo.Vehiculo.GetListaMunicipios();
+                model.listaOficinas = _contenedorTrabajo.Oficina.GetListaOficinas();
+
+                model.FechaRegistroAgencia = DateTime.Now;
+            }
+
+
+
+            return View(model);
         }
 
         [HttpGet]
@@ -270,7 +312,7 @@ namespace AIVA.Web.Areas.Admin.Controllers
 
         public ActionResult GetDatosSerie(string  serie)
         {
-            var resultado = _contenedorTrabajo.Vehiculo.GetVehiculoBySerie(serie);
+            AIVA.Modelos.Models.Vehiculo resultado = _contenedorTrabajo.Vehiculo.GetVehiculoBySerie(serie);
 
             if(resultado != null)
                return Json(new { Data = resultado });
@@ -278,7 +320,45 @@ namespace AIVA.Web.Areas.Admin.Controllers
                 return Json(new { Data = "" });
         }
 
+        public ActionResult GetListadoGeneralVendedores(string nvendedor)
+        {
+            VehiculoViewModel modelo = new VehiculoViewModel();
+            modelo.ListaVendedores = new List<Modelos.Models.Vendedor>();
+            modelo.ListaVendedores = _contenedorTrabajo.Vendedor.GetVendedoresByNombre(nvendedor);
+
+            return PartialView("_ListaVendedores", modelo);
+        }
+
+        public ActionResult GetListadoGeneralCompradores(string ncomprador)
+        {
+            VehiculoViewModel modelo = new VehiculoViewModel();
+            modelo.ListaCompradores = new List<Modelos.Models.Comprador>();
+            modelo.ListaCompradores = _contenedorTrabajo.Comprador.GetCompradorByNombre(ncomprador);
+                      
+            return PartialView("_ListaCompradores", modelo);
+        }
+
+        public ActionResult ObtenIdVendedor(int data)
+        {
+
+            AIVA.Modelos.Models.Vendedor resultado = _contenedorTrabajo.Vendedor.GetVendedorById(data);
+
+            if (resultado != null)
+                return Json(new { Data = resultado });
+            else
+                return Json(new { Data = "" });
+        }
 
 
+        public ActionResult ObtenIdComprador(int data)
+        {
+
+            AIVA.Modelos.Models.Comprador resultado = _contenedorTrabajo.Comprador.GetCompradorById(data);
+
+            if (resultado != null)
+                return Json(new { Data = resultado });
+            else
+                return Json(new { Data = "" });
+        }
     }
 }

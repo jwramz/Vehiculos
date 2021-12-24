@@ -19,5 +19,7 @@ namespace AIVA.AccesoDatos.Data.Interfaces
 
         int RegistraComprador(Comprador model);
 
+        List<Comprador> GetCompradorByNombre(string nombre);
+
     }
 }

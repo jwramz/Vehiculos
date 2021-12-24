@@ -309,5 +309,10 @@ namespace AIVA.Web.ViewModels
         public Comprador CompradorDatos { get; set; }
 
 
+        public List<Vendedor> ListaVendedores { get; set; }
+        public List<Comprador> ListaCompradores { get; set; }
+
+
+
     }
 }

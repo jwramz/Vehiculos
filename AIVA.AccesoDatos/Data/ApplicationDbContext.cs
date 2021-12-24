@@ -14,6 +14,7 @@ namespace AIVA.AccesoDatos.Data
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
            : base(options)
         {
+            
         }
         public DbSet<Cliente> Cliente { get; set; }
         public DbSet<Vehiculo> Vehiculo { get; set; }

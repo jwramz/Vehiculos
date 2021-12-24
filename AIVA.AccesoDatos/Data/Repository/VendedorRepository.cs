@@ -47,7 +47,22 @@ namespace AIVA.AccesoDatos.Data.Repository
                 return new Vendedor();
             }
         }
-              
+
+        public List<Vendedor> GetVendedoresByNombre(string nombre)
+        {
+            try
+            {
+                List<Vendedor> _vendedor = new List<Vendedor>();
+                _vendedor = _db.Vendedor.Where(x =>  x.Nombre.Contains(nombre)).ToList();
+                return _vendedor;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                return new List<Vendedor>();
+            }
+        }
+
 
         public bool Create(Vendedor model)
         {

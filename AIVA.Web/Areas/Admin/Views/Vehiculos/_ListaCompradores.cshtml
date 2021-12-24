@@ -1,0 +1,24 @@
+﻿@model AIVA.Web.ViewModels.VehiculoViewModel
+
+<table class="table table-bordered">
+    <tr>
+        <td>Id</td>
+        <td>Nombre</td>
+        <td>Teléfono</td>
+    </tr>
+    @foreach (var item in Model.ListaCompradores)
+    {
+        <tr>
+            <td>
+                @item.id
+            </td>
+            <td>
+                @item.Nombre
+            </td>
+            <td>
+                @item.NoTelefono
+            </td>
+        </tr>
+    }
+</table>
+<input id="data" type="text" name="data" />

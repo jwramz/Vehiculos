@@ -4,14 +4,16 @@ using AIVA.AccesoDatos.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace AIVA.AccesoDatos.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20211221043413_vehiculosForeingKey")]
+    partial class vehiculosForeingKey
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -340,9 +342,6 @@ namespace AIVA.AccesoDatos.Migrations
 
                     b.Property<string>("NoPlaca")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("NoRegistro")
-                        .HasColumnType("int");
 
                     b.Property<string>("NoSerie")
                         .HasColumnType("nvarchar(max)");

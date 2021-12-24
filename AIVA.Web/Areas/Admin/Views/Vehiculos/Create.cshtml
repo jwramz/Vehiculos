@@ -22,287 +22,303 @@
 {
     @Html.AntiForgeryToken()
 
-    <form>
-        @Html.ValidationSummary(false)
+<form>
+    @Html.ValidationSummary(false)
 
 
-        @Html.HiddenFor(model => model.idCompradorModal)
-        @Html.HiddenFor(model => model.idVendedorModal)
+    @Html.HiddenFor(model => model.idCompradorModal)
+    @Html.HiddenFor(model => model.idVendedorModal)
 
-        <div class="form-group row">
-            <label class="control-label col-md-2">Lugar de revisión</label>
+    <hr />
+
+       
+        
+        <div class="form-group row date-picker-default" id="dtpFechaInicio">
+            <label asp-for="FechaRegistroAgencia" class="control-label col-md-2"></label>
             <div class="col-md-2">
-                
-
-                @Html.DropDownListFor(model => model.LugarRevision, Model.listaOficinas, "Seleccione...", new { @class = "form-control", @onchange = "ObtenerSubMarcas();" })
-                @Html.ValidationMessageFor(model => model.LugarRevision)
-
-            </div>
-
-            <div class="form-group row date-picker-default" id="dtpFechaInicio">
-                <label asp-for="FechaRegistroAgencia" class="control-label col-md-4"></label>
-                <div class="col-md-8">
-                    <div class="input-group date">
-                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
-                        <input type="text" class="form-control" readonly name="@Html.NameFor(model => model.FechaRegistroAgencia)" value="@Html.Raw(Model.FechaRegistroAgencia != null ? Model.FechaRegistroAgencia.ToString("dd/MM/yyyy") : "")" />
-                    </div>
-                    <span asp-validation-for="FechaRegistroAgencia" class="text-danger"></span>
+                <div class="input-group date">
+                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                    <input type="text" class="form-control" readonly name="@Html.NameFor(model => model.FechaRegistroAgencia)" value="@Html.Raw(Model.FechaRegistroAgencia != null ? Model.FechaRegistroAgencia.ToString("dd/MM/yyyy") : "")" />
                 </div>
-               
+                <span asp-validation-for="FechaRegistroAgencia" class="text-danger"></span>
             </div>
-
-           
-            @*<label class="control-label col-md-2">Usuario</label>
-            <div class="col-md-2">
-                @Html.EditorFor(model => model.UsuarioRegistro, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.UsuarioRegistro)
-            </div>*@
+       
         </div>
 
-        <div class="card">
-            <div class="card-header">
-                <div class="card-title">
-                    Datos del Comprador
-                </div>
-            </div>
-            <div class="card-body">
-                <div class="form-group row">
-                    <label class="control-label col-md-2">ID</label>
-                    <div class="col-md-2">
-                        @Html.EditorFor(model => model.idComprador, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.idComprador)
-                    </div>
-                    <label class="control-label col-md-2">Nombre</label>
-                    <div class="col-md-2">
-                        @Html.EditorFor(model => model.NombreComprador, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.NombreComprador)
-                    </div>
-                    <label class="control-label col-md-2">Teléfono</label>
-                    <div class="col-md-2">
-                        @Html.EditorFor(model => model.TelefonoComprador, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.TelefonoComprador)
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <input type="button" value="Nuevo" class="btn btn-primary" onclick="modalComprador();" />
-                    <input type="button" value="Datos de facturación" class="btn btn-secondary" onclick="modalCompradorFacturacion();" />
-                </div>
 
+    <div class="form-group row">
+        <label class="control-label col-md-2">Lugar de revisión:</label>
+        <div class="col-md-2">
+            @Html.DropDownListFor(model => model.LugarRevision, Model.listaOficinas, "Seleccione...", new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.LugarRevision)
+        </div>
+       
+
+    </div>
+
+       <hr />
+  
+    <div class="card">
+        <div class="card-header">
+            <div class="card-title">
+                Datos del Comprador
             </div>
         </div>
-
-        <br />
-
-        <div class="card">
-            <div class="card-header">
-                <div class="card-title">
-                    Datos del Vendor
+        <div class="card-body">
+            <div class="form-group row">
+                <label class="control-label col-md-1">ID:</label>
+                <div class="col-md-2">
+                    @Html.EditorFor(model => model.idComprador, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly", @disabled = "disabled" } })
+                    @Html.ValidationMessageFor(model => model.idComprador)
+                </div>
+                <label class="control-label col-md-2">Nombre:</label>
+                <div class="col-md-3">
+                    @Html.EditorFor(model => model.NombreComprador, new { htmlAttributes =new { @class = "form-control", @onchange = "ListadoGeneralCompradores();" } })
+                    @Html.ValidationMessageFor(model => model.NombreComprador)
+                </div>
+                <label class="control-label col-md-2">Teléfono:</label>
+                <div class="col-md-2">
+                    @Html.EditorFor(model => model.TelefonoComprador, new { @class = "form-control"  })
+                    @Html.ValidationMessageFor(model => model.TelefonoComprador)
                 </div>
             </div>
-            <div class="card-body">
-                <div class="form-group row">
-                    <label class="control-label col-md-2">ID</label>
-                    <div class="col-md-2">
-                        @Html.EditorFor(model => model.idVendedor, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.idVendedor)
-                    </div>
-                    <label class="control-label col-md-2">Nombre</label>
-                    <div class="col-md-2">
-                        @Html.EditorFor(model => model.NombreVendedor, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.NombreVendedor)
-                    </div>
-                    <label class="control-label col-md-2">Teléfono</label>
-                    <div class="col-md-2">
-                        @Html.EditorFor(model => model.TelefonoVendedor, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.TelefonoVendedor)
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <input type="button" value="Nuevo" class="btn btn-primary" onclick="modalVendedor();" />
-                    <input type="button" value="Datos de facturación" class="btn btn-secondary" onclick="modalVendedorFacturacion();" />
-                </div>
+            <div class="form-group row">
+                <input type="button" value="Nuevo" class="btn btn-primary" onclick="CamposVaciosComprador();" />
+                <input type="button" value="Datos de facturación" class="btn btn-secondary" onclick="modalCompradorFacturacion();" />
+            </div>
+
+        </div>
+    </div>
+
+    <br />
+
+    <div class="card">
+        <div class="card-header">
+            <div class="card-title">
+                Datos del Vendor
             </div>
         </div>
-
-        <br />
-
-        <div class="card">
-            <div class="card-header">
-
-                <div class="card-title">
-                    Datos del vehículo
+        <div class="card-body">
+            <div class="form-group row">
+                <label class="control-label col-md-1">ID:</label>
+                <div class="col-md-2">
+                    @Html.EditorFor(model => model.idVendedor, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly", @disabled = "disabled" } })
+                    @Html.ValidationMessageFor(model => model.idVendedor)
+                </div>
+                <label class="control-label col-md-2">Nombre:</label>
+                <div class="col-md-3">
+                    @Html.EditorFor(model => model.NombreVendedor, new { htmlAttributes = new { @class = "form-control", @onchange = "ListadoGeneralVendedores();" } })
+                    @Html.ValidationMessageFor(model => model.NombreVendedor)
+                </div>
+                <label class="control-label col-md-2">Teléfono:</label>
+                <div class="col-md-2">
+                    @Html.EditorFor(model => model.TelefonoVendedor, new { @class = "form-control"  })
+                    @Html.ValidationMessageFor(model => model.TelefonoVendedor)
                 </div>
             </div>
-            <div class="card-body">
+            <div class="form-group row">
+                <input type="button" value="Nuevo" class="btn btn-primary" onclick="CamposVaciosVendedor();" />
+                <input type="button" value="Datos de facturación" class="btn btn-secondary" onclick="modalVendedorFacturacion();" />
+            </div>
+        </div>
+    </div>
 
-                <div class="form-group row">
-                    <label class="control-label col-md-2">Marca</label>
-                    <div class="col-md-2">
-                        @Html.DropDownListFor(model => model.idMarca, Model.listaMarcas, "Seleccione...", new { @class = "form-control", @onchange = "ObtenerSubMarcas();" })
-                        @Html.ValidationMessageFor(model => model.Marca)
-                    </div>
-                    <label class="control-label col-md-2">Sub Marca</label>
-                    <div class="col-md-2">
-                        @Html.DropDownListFor(model => model.idSubMarca, Model.listaModelosAutos, "Seleccione...", new { @class = "form-control" })
-                        @Html.ValidationMessageFor(model => model.SubMarca)
-                    </div>
-                    <label class="control-label col-md-2">Modelo</label>
-                    <div class="col-md-2">
-                        @Html.DropDownListFor(model => model.idModelo, Model.listaAModelos, "Seleccione...", new { @class = "form-control" })
-                        @Html.ValidationMessageFor(model => model.Modelo)
-                    </div>
+    <br />
+
+    <div class="card">
+        <div class="card-header">
+
+            <div class="card-title">
+                Datos del vehículo
+            </div>
+        </div>
+        <div class="card-body">
+
+            <div class="form-group row">
+                <label class="control-label col-md-2">Marca:</label>
+                <div class="col-md-2">
+                    @Html.DropDownListFor(model => model.idMarca, Model.listaMarcas, "Seleccione...", new { @class = "form-control", @onchange = "ObtenerSubMarcas();" })
+                    @Html.ValidationMessageFor(model => model.Marca)
+                </div>
+                <label class="control-label col-md-2">Sub Marca:</label>
+                <div class="col-md-2">
+                    @Html.DropDownListFor(model => model.idSubMarca, Model.listaModelosAutos, "Seleccione...", new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.SubMarca)
+                </div>
+                <label class="control-label col-md-2">Modelo:</label>
+                <div class="col-md-2">
+                    @Html.DropDownListFor(model => model.idModelo, Model.listaAModelos, "Seleccione...", new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.Modelo)
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label class="control-label col-md-2">No. Serie:</label>
+                <div class="col-md-2">
+                    @Html.EditorFor(model => model.NoSerie, new { htmlAttributes = new { @class = "form-control", @onchange = "validaSerie();" } })
+                    @Html.ValidationMessageFor(model => model.NoSerie)
+                </div>
+                <label class="control-label col-md-2">No. de Motor:</label>
+                <div class="col-md-2">
+                    @Html.EditorFor(model => model.NoMotor, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.NoMotor)
+                </div>
+                <label class="control-label col-md-2">5 DIG:</label>
+                <div class="col-md-2">
+                    @Html.EditorFor(model => model.CincoDigitos, new {  @class = "form-control"  })
+                    @Html.ValidationMessageFor(model => model.CincoDigitos)
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label class="control-label col-md-2">Placas:</label>
+                <div class="col-md-2">
+                    @Html.EditorFor(model => model.Placa, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Placa)
+                </div>
+                <label class="control-label col-md-2">Estado:</label>
+                <div class="col-md-2">
+                    @Html.DropDownListFor(model => model.idEstado, Model.listaEstados, "Seleccione...", new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.EstadoProcedencia)
+                </div>
+                <label class="control-label col-md-2">Procedencia:</label>
+                <div class="col-md-2">
+                    @Html.RadioButtonFor(model => model.Procedencia, "1") @Html.Raw("Nacional")
+                    @Html.Raw("&nbsp;")
+                    @Html.RadioButtonFor(model => model.Procedencia, "2")  @Html.Raw("Extranjero")
                 </div>
 
-                <div class="form-group row">
-                    <label class="control-label col-md-2">No. Serie</label>
-                    <div class="col-md-2">
-                        @Html.EditorFor(model => model.NoSerie, new { htmlAttributes = new { @class = "form-control", @onchange = "validaSerie();" } })
-                        @Html.ValidationMessageFor(model => model.NoSerie)
-                    </div>
-                    <label class="control-label col-md-2">No. de Motor</label>
-                    <div class="col-md-2">
-                        @Html.EditorFor(model => model.NoMotor, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.NoMotor)
-                    </div>
-                    <label class="control-label col-md-2">5 DIG</label>
-                    <div class="col-md-2">
-                        @Html.EditorFor(model => model.CincoDigitos, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.CincoDigitos)
-                    </div>
-                </div>
-
-                <div class="form-group row">
-                    <label class="control-label col-md-2">Placas</label>
-                    <div class="col-md-2">
-                        @Html.EditorFor(model => model.Placa, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.Placa)
-                    </div>
-                    <label class="control-label col-md-2">Estado</label>
-                    <div class="col-md-2">
-                        @Html.DropDownListFor(model => model.idEstado, Model.listaEstados, "Seleccione...", new { @class = "form-control" })
-                        @Html.ValidationMessageFor(model => model.EstadoProcedencia)
-                    </div>
-                    <label class="control-label col-md-2">Procedencia</label>
-                    <div class="col-md-2">
-                        @Html.RadioButtonFor(model => model.Procedencia, "1") @Html.Raw("Nacional")
-                        @Html.Raw("&nbsp;")
-                        @Html.RadioButtonFor(model => model.Procedencia, "2")  @Html.Raw("Extranjero")
-                    </div>
-
-                </div>
-                <div class="form-group row">
-                    <label class="control-label col-md-2">Color</label>
-                    <div class="col-md-2">
-                        @Html.DropDownListFor(model => model.idColor, Model.listaColores, "Seleccione...", new { @class = "form-control" })
-                        @Html.ValidationMessageFor(model => model.Color)
-                    </div>
+            </div>
+            <div class="form-group row">
+                <label class="control-label col-md-2">Color:</label>
+                <div class="col-md-2">
+                    @Html.DropDownListFor(model => model.idColor, Model.listaColores, "Seleccione...", new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.Color)
                 </div>
             </div>
         </div>
+    </div>
 
-        <br />
+    <br />
 
-        <div class="card">
-            <div class="card-header">
+    <div class="card">
+        <div class="card-header">
 
-                <div class="card-title">
-                    Inspección de Vehículo
-                </div>
+            <div class="card-title">
+                Inspección de Vehículo
             </div>
-            <div class="card-body">
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="form-group row">
-                            <label class="control-label col-md-4">Situación</label>
-                            <div class="col-md-8">
-                                @Html.RadioButtonFor(model => model.TipoReporte, "1") @Html.Raw("Con reporte de robo")
-                                @Html.Raw("&nbsp;")
-                                @Html.RadioButtonFor(model => model.TipoReporte, "2")  @Html.Raw("Con adeudos")
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <label class="control-label col-md-4">Documentos Apócrifos</label>
-                            <div class="col-md-8">
-                                @Html.RadioButtonFor(model => model.DocumentosAprocrifos, "1") @Html.Raw("Factura")
-                                @Html.Raw("&nbsp;")
-                                @Html.RadioButtonFor(model => model.DocumentosAprocrifos, "2")  @Html.Raw("Tenencias")
-                                @Html.Raw("&nbsp;")
-                                @Html.RadioButtonFor(model => model.DocumentosAprocrifos, "3")  @Html.Raw("IFE")
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <label class="control-label col-md-4">Numeración alterada</label>
-                            <div class="col-md-8">
-                                @Html.RadioButtonFor(model => model.NumeracionAlterada, "1") @Html.Raw("Serie")
-                                @Html.Raw("&nbsp;")
-                                @Html.RadioButtonFor(model => model.NumeracionAlterada, "2")  @Html.Raw("Motor")
-
-                            </div>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group row">
+                        <label class="control-label col-md-4">Situación:</label>
+                        <div class="col-md-8">
+                            @Html.RadioButtonFor(model => model.TipoReporte, "1") @Html.Raw("Con reporte de robo")
+                            @Html.Raw("&nbsp;")
+                            @Html.RadioButtonFor(model => model.TipoReporte, "2")  @Html.Raw("Con adeudos")
                         </div>
                     </div>
-                    <div class="col-md-6">
-                        <div class="form-group row">
-                            <label class="control-label col-md-4">Observaciones</label>
-                            <div class="col-md-8">
-                                @Html.TextAreaFor(model => model.ObservacionReporteRegistro, new { htmlAttributes = new { @class = "form-control", @cols = "10", @rows = "10" } })
-                                @Html.ValidationMessageFor(model => model.ObservacionReporteRegistro)
-                            </div>
+
+                    <div class="form-group row">
+                        <label class="control-label col-md-4">Documentos Apócrifos:</label>
+                        <div class="col-md-8">
+                            @Html.RadioButtonFor(model => model.DocumentosAprocrifos, "1") @Html.Raw("Factura")
+                            @Html.Raw("&nbsp;")
+                            @Html.RadioButtonFor(model => model.DocumentosAprocrifos, "2")  @Html.Raw("Tenencias")
+                            @Html.Raw("&nbsp;")
+                            @Html.RadioButtonFor(model => model.DocumentosAprocrifos, "3")  @Html.Raw("IFE")
                         </div>
+                    </div>
 
-                        <div class="form-group row">
-                            <label class="control-label col-md-4">No. Responsiva</label>
-                            <div class="col-md-2">
-                                @Html.EditorFor(model => model.NumeroResponsiva, new { htmlAttributes = new { @class = "form-control" } })
-                                @Html.ValidationMessageFor(model => model.NumeroResponsiva)
-                            </div>
-                            <label class="control-label col-md-4">No. Dictamen</label>
-                            <div class="col-md-2">
-                                @Html.EditorFor(model => model.NumeroDictamen, new { htmlAttributes = new { @class = "form-control" } })
-                                @Html.ValidationMessageFor(model => model.NumeroDictamen)
-                            </div>
+                    <div class="form-group row">
+                        <label class="control-label col-md-4">Numeración alterada:</label>
+                        <div class="col-md-8">
+                            @Html.RadioButtonFor(model => model.NumeracionAlterada, "1") @Html.Raw("Serie")
+                            @Html.Raw("&nbsp;")
+                            @Html.RadioButtonFor(model => model.NumeracionAlterada, "2")  @Html.Raw("Motor")
 
-                        </div>
-
-                        <div class="form-group row">
-
-                            <label class="control-label col-md-4">Recibo Número</label>
-                            <div class="col-md-2">
-                                @Html.EditorFor(model => model.ReciboNumero, new { htmlAttributes = new { @class = "form-control" } })
-                                @Html.ValidationMessageFor(model => model.ReciboNumero)
-                            </div>
-                            <label class="control-label col-md-4">Recibío</label>
-                            <div class="col-md-2">
-                                @Html.EditorFor(model => model.Recibio, new { htmlAttributes = new { @class = "form-control" } })
-                                @Html.ValidationMessageFor(model => model.Recibio)
-                            </div>
                         </div>
                     </div>
                 </div>
+                <div class="col-md-6">
+                    <div class="form-group row">
+                        <label class="control-label col-md-4">Observaciones:</label>
+                        <div class="col-md-8">
+                            @Html.TextAreaFor(model => model.ObservacionReporteRegistro, new { @class = "form-control", @cols = "10", @rows = "5" })
+                            @Html.ValidationMessageFor(model => model.ObservacionReporteRegistro)
+                        </div>
+                    </div>
 
+                    <div class="form-group row">
+                        <label class="control-label col-md-4">No. Responsiva:</label>
+                        <div class="col-md-4">
+                            @Html.EditorFor(model => model.NumeroResponsiva, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.NumeroResponsiva)
+                        </div>
+                        <div class="col-md-4">
+                            @Html.ActionLink("Responsiva", "Index", new { }, new { @class = "btn btn-outline-secondary" })
+                        </div>
 
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="control-label col-md-4">No. Dictamen:</label>
+                        <div class="col-md-4">
+                            @Html.EditorFor(model => model.NumeroDictamen, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.NumeroDictamen)
+                        </div>
+                        <div class="col-md-4">
+                            @Html.ActionLink("Dictamen", "Index", new { }, new { @class = "btn btn-outline-secondary" })
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+
+                        <label class="control-label col-md-4">Recibo Número:</label>
+                        <div class="col-md-4">
+                            @Html.EditorFor(model => model.ReciboNumero, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.ReciboNumero)
+                        </div>
+
+                    </div>
+                    <div class="form-group row">
+                        <label class="control-label col-md-4">Recibío:</label>
+                        <div class="col-md-4">
+                            @Html.EditorFor(model => model.Recibio, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.Recibio)
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="control-label col-md-4">Pago $:</label>
+                        <div class="col-md-4">
+                            @Html.EditorFor(model => model.Pago, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.Pago)
+                        </div>
+                        <div class="col-md-4">
+                            @Html.ActionLink("Facturar", "Index", new { }, new { @class = "btn btn-outline-secondary" })
+                        </div>
+                        </div>
+                    </div>
             </div>
+
+
         </div>
+    </div>
 
-        <br />
+    <br />
 
-        <div class="form-group row">
-            <div class="col-md-12">
-                <input type="submit" value="Guardar" class="btn btn-success" />
+    <div class="form-group row">
+        <div class="col-md-12">
+            <input type="submit" value="Guardar" class="btn btn-success" />
 
-                @Html.ActionLink("Nueva captura", "Index", new { }, new { @class = "btn btn-primary" })
+            @Html.ActionLink("Nueva captura", "Index", new { }, new { @class = "btn btn-primary" })
 
-                @Html.ActionLink("Responsiva", "Index", new { }, new { @class = "btn btn-primary" })
-
-                @Html.ActionLink("Facturar", "Index", new { }, new { @class = "btn btn-primary" })
-
-                @Html.ActionLink("Dictamen", "Index", new { }, new { @class = "btn btn-primary" })
-
-
-            </div>
+          
         </div>
-    </form>
+    </div>
+</form>
 }
 
 
@@ -310,6 +326,42 @@
 <br />
 <br />
 
+
+<div class="modal fade" id="ModalVendedorParcial" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="myModalLabel">Listado general de vendedores</h4>
+            </div>
+            <div class="modal-body">
+                <div id="popup"></div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="btnRegistrarVendedor" onclick="ObtenIdVendedor();" class="btn btn-success">Aceptar</button>
+                <button class="btn btn-primary" type="button" data-dismiss="modal">Cancelar</button>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="ModalCompradorParcial" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="myModalLabel">Listado general de compradores</h4>
+            </div>
+            <div class="modal-body">
+                <div id="popupComprador"></div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="btnRegistrarVendedor" onclick="ObtenIdComprador();" class="btn btn-success">Aceptar</button>
+                <button class="btn btn-primary" type="button" data-dismiss="modal">Cancelar</button>
+
+            </div>
+        </div>
+    </div>
+</div>
 
 <div class="modal fade" id="ModalVendedor" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -477,9 +529,34 @@
     <script src="~/js/Comunes.js"></script>
     <script type="text/javascript">
 
+        window.addEventListener('keydown', function (e) {
+            if (e.keyIdentifier == 'U+000A' || e.keyIdentifier == 'Enter' || e.keyCode == 13) {
+                if (e.target.nodeName == 'INPUT' && e.target.type == 'text') {
+                    e.preventDefault();
+                    return false;
+                }
+            }
+        }, true);
+
+
         $(document).ready(function () {
             InicializarDatePickerDefault();
         });
+
+        function CamposVaciosVendedor() {
+            $("#idVendedor").val("");
+            $("#idVendedorModal").val("");
+            $("#NombreVendedor").val("");
+            $("#TelefonoVendedor").val("");
+        }
+
+        function CamposVaciosComprador() {
+            $("#idComprador").val("");
+            $("#idCompradorModal").val("");
+            $("#NombreComprador").val("");
+            $("#TelefonoComprador").val("");
+
+        }
 
         function modal() {
             $("#ModalTest").modal({
@@ -491,6 +568,23 @@
 
         function modalVendedor() {
             $("#ModalVendedor").modal({
+                escapeClose: false,
+                clickClose: false,
+                showClose: false
+            });
+        }
+
+
+        function modalVendedorParcial() {
+            $("#ModalVendedorParcial").modal({
+                escapeClose: false,
+                clickClose: false,
+                showClose: false
+            });
+        }
+
+        function modalCompradorParcial() {
+            $("#ModalCompradorParcial").modal({
                 escapeClose: false,
                 clickClose: false,
                 showClose: false
@@ -518,6 +612,97 @@
                 escapeClose: false,
                 clickClose: false,
                 showClose: false
+            });
+        }
+
+        function ListadoGeneralVendedores() {
+            
+            var nvendedor = $("#NombreVendedor").val();
+           
+            $.ajax({
+                type: 'POST',
+                url: '@Url.Action("GetListadoGeneralVendedores", "Vehiculos")',
+                data: { nvendedor },
+                
+                dataType: "html",
+                async: false,
+                success: function (data) {
+                   
+                  
+                    modalVendedorParcial();
+                    $('#popup').html(data);
+
+
+                },
+                error: function (error) {
+                    alert('error')
+                }
+            })
+        }
+
+        function ListadoGeneralCompradores() {
+           
+            var ncomprador = $("#NombreComprador").val();
+           
+            $.ajax({
+                type: 'POST',
+                url: '@Url.Action("GetListadoGeneralCompradores", "Vehiculos")',
+                data: { ncomprador },
+               
+                dataType: "html",
+                async: false,
+                success: function (data) {
+                    
+                    modalCompradorParcial();
+                    $('#popupComprador').html(data);
+                },
+                error: function (error) {
+                    alert('error')
+                }
+            })
+        }
+
+        function ObtenIdVendedor(){
+            var idSeleccionado = $("input[name='data']").val();
+            $.ajax({
+                type: 'POST',
+                url: '@Url.Action("ObtenIdVendedor", "Vehiculos")',
+                dataType: 'json',
+                data: { "data": $("input[name='data']").val() },
+                success: function (Data) {
+
+                    $("#idVendedor").val(idSeleccionado);
+                    $("#idVendedorModal").val(idSeleccionado);
+                    $("#NombreVendedor").val(Data.data.nombre);
+                    $("#TelefonoVendedor").val(Data.data.noTelefono);
+                    $('#ModalVendedorParcial').modal('hide');
+                    $('#popup').append("");
+                },
+                error: function (error) {
+                    alert('error')
+                }
+            });
+        }
+
+        function ObtenIdComprador(){
+            var idSeleccionado = $("input[name='data']").val();
+            $.ajax({
+                type: 'POST',
+                url: '@Url.Action("ObtenIdComprador", "Vehiculos")',
+                dataType: 'json',
+                data: { "data": $("input[name='data']").val() },
+                success: function (Data) {
+
+                    $("#idComprador").val(idSeleccionado);
+                    $("#idCompradorModal").val(idSeleccionado);
+                    $("#NombreComprador").val(Data.data.nombre);
+                    $("#TelefonoComprador").val(Data.data.noTelefono);
+                    $('#ModalCompradorParcial').modal('hide');
+                    $('#popupComprador').append("");
+                },
+                error: function (error) {
+                    alert('error')
+                }
             });
         }
 
@@ -651,7 +836,7 @@
                 dataType: 'json',
                 data: { serie },
                 success: function (data) {
-
+                    debugger;
                     if (data != "") {
 
                         $("#NoMotor").val(data.data.noMotor);

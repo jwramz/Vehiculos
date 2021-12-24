@@ -17,18 +17,22 @@ namespace AIVA.Modelos.Models
         public string Marca { get; set; }
 
         public int? idMarca { get; set; }
+        public virtual Marca MarcaVehiculo { get; set; }
 
         public string SubMarca { get; set; }
 
         public int? idSubMarca { get; set; }
+        public virtual SubMarca SubMarcaVehiculo { get; set; }
 
         public string Modelo { get; set; }
 
         public int? idModelo { get; set; }
+        public virtual AnioModelo AnioModeloVehiculo { get; set; }
 
         public string Color { get; set; }
 
         public int? idColor { get; set; }
+        public virtual ColoresVehiculos ColoresVehiculo { get; set; }
 
         public string NoSerie { get; set; }
 
@@ -41,6 +45,7 @@ namespace AIVA.Modelos.Models
         public string Estado { get; set; }
 
         public int? idEstado { get; set; }
+        public virtual Estados EstadoOrigen { get; set; }
 
         public int? idPais { get; set; }
 
@@ -69,6 +74,8 @@ namespace AIVA.Modelos.Models
         public string UsuarioRegistro { get; set; } 
 
         public int? Ficha { get; set; }
+
+        public int? NoRegistro { get; set; }
 
         public int? CheckDebe { get; set; }
 
