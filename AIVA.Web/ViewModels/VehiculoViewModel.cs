@@ -77,7 +77,7 @@ namespace AIVA.Web.ViewModels
         public int idColor { get; set; }
 
         [DisplayName("5 DIG")]
-        public string CincoDigitos { get; set; }
+        public int CincoDigitos { get; set; }
 
         [DisplayName("No. placa")]
         public string Placa { get; set; }
@@ -310,9 +310,22 @@ namespace AIVA.Web.ViewModels
 
 
         public List<Vendedor> ListaVendedores { get; set; }
+     
         public List<Comprador> ListaCompradores { get; set; }
 
+        public List<ReporteVehiculo> VehiculosReportados { get; set; }
+
+        //Busqueda 
+
+        [DisplayName("Fecha inicio")]
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
+        public DateTime FechaInicio { get; set; }
+
+        [DisplayName("Fecha término")]
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
+        public DateTime FechaTermino { get; set; }
 
 
+        public bool NuevoRegistro { get; set; }
     }
 }

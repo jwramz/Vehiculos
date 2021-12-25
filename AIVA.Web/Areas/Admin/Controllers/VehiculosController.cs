@@ -30,7 +30,18 @@ namespace AIVA.Web.Areas.Admin.Controllers
             VehiculoViewModel vehiculo = new VehiculoViewModel();
             vehiculo.listaVehiculos = _contenedorTrabajo.Vehiculo.GetVehiculos();
 
+            foreach (var obj in vehiculo.listaVehiculos) {
+
+              string dato =   obj.AnioModeloVehiculo.Descripcion;
+            }
+
             return View(vehiculo);
+        }
+
+        [HttpGet]
+        public IActionResult Resultados()
+        {
+            return View();
         }
 
         [HttpGet]
@@ -47,6 +58,7 @@ namespace AIVA.Web.Areas.Admin.Controllers
             vehiculo.listaOficinas = _contenedorTrabajo.Oficina.GetListaOficinas();
 
             vehiculo.FechaRegistroAgencia = DateTime.Now;
+            vehiculo.NuevoRegistro = false;
 
             return View(vehiculo);
         }
@@ -55,6 +67,13 @@ namespace AIVA.Web.Areas.Admin.Controllers
         public IActionResult Create(VehiculoViewModel model)
         {
             model.datosVehiculo = new Modelos.Models.Vehiculo();
+
+
+            model.listaColores = _contenedorTrabajo.Vehiculo.GetListaColorVehiculo();
+            model.listaEstados = _contenedorTrabajo.Vehiculo.GetListaEstados();
+            model.listaAModelos = _contenedorTrabajo.Vehiculo.GetListaAModelo();       
+            model.listaOficinas = _contenedorTrabajo.Oficina.GetListaOficinas();
+
 
             model.datosVehiculo.FechaRegistro = model.FechaRegistroAgencia;
 
@@ -80,8 +99,9 @@ namespace AIVA.Web.Areas.Admin.Controllers
             model.datosVehiculo.idEstado = model.idEstado;
 
             model.datosVehiculo.idPais = 0;
-            model.datosVehiculo.idComprador = model.idComprador;
-            model.datosVehiculo.idVendedor = model.idVendedor;
+            model.datosVehiculo.idComprador = model.idCompradorModal;
+            model.datosVehiculo.idVendedor = model.idVendedorModal;
+            model.datosVehiculo.procedencia = model.Procedencia;
 
             model.datosVehiculo.Observaciones = model.ObservacionReporteRegistro;
             model.datosVehiculo.TipoReporte = model.TipoReporte;
@@ -93,8 +113,11 @@ namespace AIVA.Web.Areas.Admin.Controllers
             model.datosVehiculo.NumeroResponsiva = model.NumeroResponsiva;
             model.datosVehiculo.LugarRevision = model.LugarRevision;
             model.datosVehiculo.UsuarioRegistro = model.UsuarioRegistro;
-                                
-            
+            model.datosVehiculo.CincoDigitos = model.CincoDigitos;
+
+            model.listaMarcas = _contenedorTrabajo.Vehiculo.GetListaMarcas();
+            model.listaModelosAutos = _contenedorTrabajo.Modelo.GetSubMarcasPorMarca(model.idMarca);
+
             bool resultado =  _contenedorTrabajo.Vehiculo.Create(model.datosVehiculo);
             _contenedorTrabajo.Save();
 
@@ -105,15 +128,13 @@ namespace AIVA.Web.Areas.Admin.Controllers
                 TempData["Mensaje"] = "Datos registrados con éxito";
                 TempData["TipoMensaje"] = "success";
 
-                model.listaColores = _contenedorTrabajo.Vehiculo.GetListaColorVehiculo();
-                model.listaEstados = _contenedorTrabajo.Vehiculo.GetListaEstados();
-                model.listaAModelos = _contenedorTrabajo.Vehiculo.GetListaAModelo();
-                model.listaMarcas = _contenedorTrabajo.Vehiculo.GetListaMarcas();
-                model.listaModelosAutos = _contenedorTrabajo.Vehiculo.GetListaModelos();
-                model.listaMunicipios = _contenedorTrabajo.Vehiculo.GetListaMunicipios();
-                model.listaOficinas = _contenedorTrabajo.Oficina.GetListaOficinas();
 
-                model.FechaRegistroAgencia = DateTime.Now;
+
+                model.FechaRegistroAgencia = (DateTime)model.datosVehiculo.FechaRegistro;
+                model.idVendedor = (int) model.datosVehiculo.idVendedor;
+                model.idComprador = (int)model.datosVehiculo.idComprador;
+
+                model.NuevoRegistro = true;
             }
             else
             {
@@ -121,15 +142,11 @@ namespace AIVA.Web.Areas.Admin.Controllers
                 TempData["Mensaje"] = "Error en el registro de los datos del vehiculo";
                 TempData["TipoMensaje"] = "warning";
 
-                model.listaColores = _contenedorTrabajo.Vehiculo.GetListaColorVehiculo();
-                model.listaEstados = _contenedorTrabajo.Vehiculo.GetListaEstados();
-                model.listaAModelos = _contenedorTrabajo.Vehiculo.GetListaAModelo();
-                model.listaMarcas = _contenedorTrabajo.Vehiculo.GetListaMarcas();
-                model.listaModelosAutos = _contenedorTrabajo.Vehiculo.GetListaModelos();
-                model.listaMunicipios = _contenedorTrabajo.Vehiculo.GetListaMunicipios();
-                model.listaOficinas = _contenedorTrabajo.Oficina.GetListaOficinas();
+                model.FechaRegistroAgencia = (DateTime)model.datosVehiculo.FechaRegistro;
+                model.idVendedor = (int)model.datosVehiculo.idVendedor;
+                model.idComprador = (int)model.datosVehiculo.idComprador;
 
-                model.FechaRegistroAgencia = DateTime.Now;
+                model.NuevoRegistro = false;
             }
 
 
@@ -184,6 +201,8 @@ namespace AIVA.Web.Areas.Admin.Controllers
             model.datosVehiculo.LugarRevision = model.LugarRevision;
             model.datosVehiculo.UsuarioRegistro = model.UsuarioRegistro;
             model.datosVehiculo.Ficha = model.Ficha;
+            model.datosVehiculo.procedencia = model.Procedencia;
+            model.datosVehiculo.CincoDigitos = model.CincoDigitos;
 
             _contenedorTrabajo.Vehiculo.Update(model.datosVehiculo);
             _contenedorTrabajo.Save();
@@ -348,7 +367,6 @@ namespace AIVA.Web.Areas.Admin.Controllers
             else
                 return Json(new { Data = "" });
         }
-
 
         public ActionResult ObtenIdComprador(int data)
         {

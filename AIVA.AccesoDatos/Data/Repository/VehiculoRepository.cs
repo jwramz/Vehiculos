@@ -52,6 +52,8 @@ namespace AIVA.AccesoDatos.Data.Repository
         {
             try
             {
+                model.Estatus = true;
+                
                 _db.Vehiculo.Add(model);
                 _db.SaveChanges();
                
@@ -93,9 +95,12 @@ namespace AIVA.AccesoDatos.Data.Repository
                 datos.Estado = vehiculo.Estado;
                 datos.idEstado = vehiculo.idEstado;
 
-                datos.idPais = datos.idPais;
-                datos.idComprador = datos.idComprador;
-                datos.idVendedor = datos.idVendedor;
+                datos.idPais = vehiculo.idPais;
+                datos.idComprador = vehiculo.idComprador;
+                datos.idVendedor = vehiculo.idVendedor;
+
+                datos.procedencia = vehiculo.procedencia;
+                datos.CincoDigitos = vehiculo.CincoDigitos;
 
                 datos.Observaciones = vehiculo.Observaciones;
                 datos.TipoReporte = vehiculo.TipoReporte;

@@ -4,14 +4,16 @@ using AIVA.AccesoDatos.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace AIVA.AccesoDatos.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20211224184557_actualizacionTablaVehiculos")]
+    partial class actualizacionTablaVehiculos
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -260,72 +262,6 @@ namespace AIVA.AccesoDatos.Migrations
                     b.ToTable("Oficina");
                 });
 
-            modelBuilder.Entity("AIVA.Modelos.Models.ReporteVehiculo", b =>
-                {
-                    b.Property<int>("id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int?>("AnioModelo")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Averiguacion")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Base")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("CincoDigitos")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Color")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Estado")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Lugar")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Marca")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Modelo")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ModusOperandi")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("NoMotor")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("NoPlaca")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("NoSerie")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Observaciones")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Pais")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("RFV")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("SubMarca")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Violencia")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("id");
-
-                    b.ToTable("ReporteVehiculo");
-                });
-
             modelBuilder.Entity("AIVA.Modelos.Models.SubMarca", b =>
                 {
                     b.Property<int>("id")
@@ -360,9 +296,6 @@ namespace AIVA.AccesoDatos.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<int?>("CheckDebe")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("CincoDigitos")
                         .HasColumnType("int");
 
                     b.Property<string>("Color")
@@ -458,12 +391,7 @@ namespace AIVA.AccesoDatos.Migrations
                     b.Property<int?>("idVendedor")
                         .HasColumnType("int");
 
-                    b.Property<int?>("procedencia")
-                        .HasColumnType("int");
-
                     b.HasKey("id");
-
-                    b.HasIndex("LugarRevision");
 
                     b.HasIndex("idColor");
 
@@ -780,10 +708,6 @@ namespace AIVA.AccesoDatos.Migrations
 
             modelBuilder.Entity("AIVA.Modelos.Models.Vehiculo", b =>
                 {
-                    b.HasOne("AIVA.Modelos.Models.Oficina", "Oficina")
-                        .WithMany()
-                        .HasForeignKey("LugarRevision");
-
                     b.HasOne("AIVA.Modelos.Models.ColoresVehiculos", "ColoresVehiculo")
                         .WithMany()
                         .HasForeignKey("idColor");
@@ -821,8 +745,6 @@ namespace AIVA.AccesoDatos.Migrations
                     b.Navigation("EstadoOrigen");
 
                     b.Navigation("MarcaVehiculo");
-
-                    b.Navigation("Oficina");
 
                     b.Navigation("SubMarcaVehiculo");
 

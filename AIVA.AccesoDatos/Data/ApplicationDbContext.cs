@@ -32,7 +32,9 @@ namespace AIVA.AccesoDatos.Data
         public DbSet<ColoresVehiculos> PinturaVehiculo { get; set; }
         public DbSet<ApplicationUser> ApplicationUser { get; set; }
 
-       
+        public DbSet<ReporteVehiculo> ReporteVehiculo { get; set; }
+
+
 
     }
 }

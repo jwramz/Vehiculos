@@ -28,22 +28,25 @@
 
     @Html.HiddenFor(model => model.idCompradorModal)
     @Html.HiddenFor(model => model.idVendedorModal)
+    @Html.HiddenFor(model => model.NuevoRegistro)
+
+
 
     <hr />
 
-       
-        
-        <div class="form-group row date-picker-default" id="dtpFechaInicio">
-            <label asp-for="FechaRegistroAgencia" class="control-label col-md-2"></label>
-            <div class="col-md-2">
-                <div class="input-group date">
-                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
-                    <input type="text" class="form-control" readonly name="@Html.NameFor(model => model.FechaRegistroAgencia)" value="@Html.Raw(Model.FechaRegistroAgencia != null ? Model.FechaRegistroAgencia.ToString("dd/MM/yyyy") : "")" />
-                </div>
-                <span asp-validation-for="FechaRegistroAgencia" class="text-danger"></span>
+
+
+    <div class="form-group row date-picker-default" id="dtpFechaInicio">
+        <label asp-for="FechaRegistroAgencia" class="control-label col-md-2"></label>
+        <div class="col-md-2">
+            <div class="input-group date">
+                <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                <input type="text" class="form-control" readonly name="@Html.NameFor(model => model.FechaRegistroAgencia)" value="@Html.Raw(Model.FechaRegistroAgencia != null ? Model.FechaRegistroAgencia.ToString("dd/MM/yyyy") : "")" />
             </div>
-       
+            <span asp-validation-for="FechaRegistroAgencia" class="text-danger"></span>
         </div>
+
+    </div>
 
 
     <div class="form-group row">
@@ -52,12 +55,12 @@
             @Html.DropDownListFor(model => model.LugarRevision, Model.listaOficinas, "Seleccione...", new { @class = "form-control" })
             @Html.ValidationMessageFor(model => model.LugarRevision)
         </div>
-       
+
 
     </div>
 
-       <hr />
-  
+    <hr />
+
     <div class="card">
         <div class="card-header">
             <div class="card-title">
@@ -73,12 +76,12 @@
                 </div>
                 <label class="control-label col-md-2">Nombre:</label>
                 <div class="col-md-3">
-                    @Html.EditorFor(model => model.NombreComprador, new { htmlAttributes =new { @class = "form-control", @onchange = "ListadoGeneralCompradores();" } })
+                    @Html.EditorFor(model => model.NombreComprador, new { htmlAttributes = new { @class = "form-control", @onchange = "ListadoGeneralCompradores();" } })
                     @Html.ValidationMessageFor(model => model.NombreComprador)
                 </div>
                 <label class="control-label col-md-2">Teléfono:</label>
                 <div class="col-md-2">
-                    @Html.EditorFor(model => model.TelefonoComprador, new { @class = "form-control"  })
+                    @Html.EditorFor(model => model.TelefonoComprador, new { @class = "form-control" })
                     @Html.ValidationMessageFor(model => model.TelefonoComprador)
                 </div>
             </div>
@@ -112,7 +115,7 @@
                 </div>
                 <label class="control-label col-md-2">Teléfono:</label>
                 <div class="col-md-2">
-                    @Html.EditorFor(model => model.TelefonoVendedor, new { @class = "form-control"  })
+                    @Html.EditorFor(model => model.TelefonoVendedor, new { @class = "form-control" })
                     @Html.ValidationMessageFor(model => model.TelefonoVendedor)
                 </div>
             </div>
@@ -137,12 +140,12 @@
             <div class="form-group row">
                 <label class="control-label col-md-2">Marca:</label>
                 <div class="col-md-2">
-                    @Html.DropDownListFor(model => model.idMarca, Model.listaMarcas, "Seleccione...", new { @class = "form-control", @onchange = "ObtenerSubMarcas();" })
+                    @Html.DropDownListFor(model => model.idMarca, Model.listaMarcas, "Seleccione...",  new { @class = "form-control", @onchange = "ObtenerSubMarcas();", @id = "idMarca" })
                     @Html.ValidationMessageFor(model => model.Marca)
                 </div>
                 <label class="control-label col-md-2">Sub Marca:</label>
                 <div class="col-md-2">
-                    @Html.DropDownListFor(model => model.idSubMarca, Model.listaModelosAutos, "Seleccione...", new { @class = "form-control" })
+                    @Html.DropDownListFor(model => model.idSubMarca, Model.listaModelosAutos, "Seleccione...", new { @class = "form-control", @id = "idSubMarca" })
                     @Html.ValidationMessageFor(model => model.SubMarca)
                 </div>
                 <label class="control-label col-md-2">Modelo:</label>
@@ -165,7 +168,7 @@
                 </div>
                 <label class="control-label col-md-2">5 DIG:</label>
                 <div class="col-md-2">
-                    @Html.EditorFor(model => model.CincoDigitos, new {  @class = "form-control"  })
+                    @Html.EditorFor(model => model.CincoDigitos, new { @class = "form-control" })
                     @Html.ValidationMessageFor(model => model.CincoDigitos)
                 </div>
             </div>
@@ -299,8 +302,8 @@
                         <div class="col-md-4">
                             @Html.ActionLink("Facturar", "Index", new { }, new { @class = "btn btn-outline-secondary" })
                         </div>
-                        </div>
                     </div>
+                </div>
             </div>
 
 
@@ -311,11 +314,13 @@
 
     <div class="form-group row">
         <div class="col-md-12">
+            @if (Model.NuevoRegistro == false) {  
             <input type="submit" value="Guardar" class="btn btn-success" />
+            }
 
-            @Html.ActionLink("Nueva captura", "Index", new { }, new { @class = "btn btn-primary" })
+            @Html.ActionLink("Nueva captura", "Create", new { }, new { @class = "btn btn-primary" })
 
-          
+
         </div>
     </div>
 </form>
@@ -574,7 +579,6 @@
             });
         }
 
-
         function modalVendedorParcial() {
             $("#ModalVendedorParcial").modal({
                 escapeClose: false,
@@ -811,12 +815,14 @@
         function ObtenerSubMarcas() {
             LimpiarDropDownList($ListaModelos);
             var valor = $("#idMarca").val();
+            debugger;
             $.ajax({
                 type: 'POST',
                 url: '@Url.Action("GetSubMarcas", "Vehiculos")',
                 dataType: 'json',
                 data: { valor },
                 success: function (Data) {
+                    debugger;
                     $.each(Data.data, function (i, data) {
                         $ListaModelos.append('<option value="' + data.value + '">' + data.text + '</option>');
                     });

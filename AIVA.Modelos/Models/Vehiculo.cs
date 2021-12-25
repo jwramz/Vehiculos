@@ -17,21 +17,29 @@ namespace AIVA.Modelos.Models
         public string Marca { get; set; }
 
         public int? idMarca { get; set; }
+  
+        [ForeignKey("idMarca")]
         public virtual Marca MarcaVehiculo { get; set; }
 
         public string SubMarca { get; set; }
 
         public int? idSubMarca { get; set; }
+    
+        [ForeignKey("idSubMarca")]
         public virtual SubMarca SubMarcaVehiculo { get; set; }
 
         public string Modelo { get; set; }
 
         public int? idModelo { get; set; }
+      
+        [ForeignKey("idModelo")]
         public virtual AnioModelo AnioModeloVehiculo { get; set; }
 
         public string Color { get; set; }
 
         public int? idColor { get; set; }
+      
+        [ForeignKey("idColor")]
         public virtual ColoresVehiculos ColoresVehiculo { get; set; }
 
         public string NoSerie { get; set; }
@@ -45,13 +53,20 @@ namespace AIVA.Modelos.Models
         public string Estado { get; set; }
 
         public int? idEstado { get; set; }
+    
+        [ForeignKey("idEstado")]
         public virtual Estados EstadoOrigen { get; set; }
 
         public int? idPais { get; set; }
 
         public int? idComprador { get; set; }
+        [ForeignKey("idComprador")]
+        public virtual Comprador Comprador { get; set; }
 
         public int? idVendedor { get; set; }
+       
+        [ForeignKey("idVendedor")]
+        public virtual Vendedor Vendedor { get; set; }
 
         public string Observaciones { get; set; }
 
@@ -71,6 +86,9 @@ namespace AIVA.Modelos.Models
 
         public int? LugarRevision { get; set; }
 
+        [ForeignKey("LugarRevision")]
+        public virtual Oficina Oficina { get; set; }
+
         public string UsuarioRegistro { get; set; } 
 
         public int? Ficha { get; set; }
@@ -83,6 +101,9 @@ namespace AIVA.Modelos.Models
         
         public bool? Estatus { get; set; }
 
+        public int? procedencia { get; set; }
+
+        public int? CincoDigitos { get; set; }
 
 
     }
