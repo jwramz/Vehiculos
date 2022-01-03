@@ -26,6 +26,7 @@ namespace AIVA.AccesoDatos.Data.Repository
             Marca = new MarcaRepository(_db);
             Modelo = new ModeloRepository(_db);
             Oficina = new OficinaRepository(_db);
+            ReporteVehiculo = new ReporteVehiculoRepository(_db);
         }
 
         public ICliente Cliente { get; private set; }
@@ -49,6 +50,8 @@ namespace AIVA.AccesoDatos.Data.Repository
         public IMarca Marca { get; private set; }
 
         public IModelo Modelo { get; private set; }
+
+        public IReporteVehiculo ReporteVehiculo { get; private set; }
 
         public void Dispose()
         {

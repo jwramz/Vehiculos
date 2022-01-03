@@ -42,7 +42,7 @@
                     <tbody>
                         @foreach (var item in Model.VehiculosReportados)
                         {
-
+                            int id = item.id;
 
                             <tr>
                                 <td class="text-center">
@@ -68,7 +68,7 @@
                                 </td>
 
                                 <td class="text-center">
-                                    @Html.ActionLink("Ver", "Edit", "Cliente", new { id = item.id }, new { @class = "btn btn-success" })
+                                    <button class="btn btn-outline-secondary " type="button" onclick="EditBitacora('@id');"><i class="fa fa-paste"></i> Ver</button>
                                 </td>
                             </tr>
                         }
@@ -79,6 +79,111 @@
             <!-- /.card-body -->
         </div>
         <!-- /.card -->
+    </div>
+</div>
+
+<br />
+
+
+<div class="card">
+    <div class="card-header">
+
+        <div class="card-title">
+            Datos del vehículo
+        </div>
+    </div>
+    <div class="card-body">
+        <div class="form-group row">
+            <label class="control-label col-md-2">Lugar:</label>
+            <div class="col-md-2">
+                @Html.EditorFor(model => model.LugarReporte, new { htmlAttributes = new { @class = "form-control" } })
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label class="control-label col-md-2">RFV:</label>
+            <div class="col-md-2">
+                @Html.EditorFor(model => model.RFV, new { htmlAttributes = new { @class = "form-control" } })
+
+            </div>
+            <label class="control-label col-md-2">Placa:</label>
+            <div class="col-md-2">
+                @Html.EditorFor(model => model.Placa, new { htmlAttributes = new { @class = "form-control" } })
+
+            </div>
+            <label class="control-label col-md-2">Fecha:</label>
+            <div class="col-md-2">
+                @Html.EditorFor(model => model.FechaRegistroReporte, new { htmlAttributes = new { @class = "form-control" } })
+
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label class="control-label col-md-2">No. Serie:</label>
+            <div class="col-md-2">
+                @Html.EditorFor(model => model.NoSerie, new { htmlAttributes = new { @class = "form-control", @onchange = "validaSerie();" } })
+
+            </div>
+            <label class="control-label col-md-2">No. de Motor:</label>
+            <div class="col-md-2">
+                @Html.EditorFor(model => model.NoMotor, new { @class = "form-control" })
+
+            </div>
+            <label class="control-label col-md-2">5 DIG:</label>
+            <div class="col-md-2">
+                @Html.EditorFor(model => model.CincoDigitos, new { @class = "form-control" })
+
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label class="control-label col-md-2">Marca:</label>
+            <div class="col-md-2">
+                @Html.EditorFor(model => model.Marca, new { htmlAttributes = new { @class = "form-control", @onchange = "validaSerie();" } })
+
+            </div>
+            <label class="control-label col-md-2">Modelo:</label>
+            <div class="col-md-2">
+                @Html.EditorFor(model => model.Modelo, new { @class = "form-control" })
+
+            </div>
+            <label class="control-label col-md-2">Violencia:</label>
+            <div class="col-md-2">
+                @Html.RadioButtonFor(model => model.Violencia, "1") @Html.Raw("Si")
+                @Html.Raw("&nbsp;")
+                @Html.RadioButtonFor(model => model.Violencia, "2")  @Html.Raw("No")
+
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label class="control-label col-md-2">Modus Operandi:</label>
+            <div class="col-md-2">
+                @Html.EditorFor(model => model.ModusOperandi, new { htmlAttributes = new { @class = "form-control", @onchange = "validaSerie();" } })
+
+            </div>
+            <label class="control-label col-md-2">Base:</label>
+            <div class="col-md-2">
+                @Html.EditorFor(model => model.BaseAveriguacion, new { @class = "form-control" })
+
+            </div>
+            <label class="control-label col-md-2">Averiguación:</label>
+            <div class="col-md-2">
+                @Html.EditorFor(model => model.Averiguacion, new { @class = "form-control" })
+
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label class="control-label col-md-2">Observaciones:</label>
+            <div class="col-md-8">
+                @Html.EditorFor(model => model.ObservacionReporteRegistro, new { htmlAttributes = new { @class = "form-control", @onchange = "validaSerie();" } })
+
+            </div>
+            
+        </div>
+
+        
     </div>
 </div>
 

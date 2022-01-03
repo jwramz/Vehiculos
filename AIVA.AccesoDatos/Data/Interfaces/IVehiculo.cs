@@ -33,5 +33,7 @@ namespace AIVA.AccesoDatos.Data.Interfaces
 
         Vehiculo GetVehiculoBySerie(string _noserie);
 
+        List<ReporteVehiculo> GetReportesVehiculos();
+
     }
 }

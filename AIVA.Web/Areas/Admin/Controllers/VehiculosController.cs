@@ -30,6 +30,17 @@ namespace AIVA.Web.Areas.Admin.Controllers
             VehiculoViewModel vehiculo = new VehiculoViewModel();
             vehiculo.listaVehiculos = _contenedorTrabajo.Vehiculo.GetVehiculos();
 
+            vehiculo.listaColores = _contenedorTrabajo.Vehiculo.GetListaColorVehiculo();
+            vehiculo.listaEstados = _contenedorTrabajo.Vehiculo.GetListaEstados();
+            vehiculo.listaAModelos = _contenedorTrabajo.Vehiculo.GetListaAModelo();
+            vehiculo.listaMarcas = _contenedorTrabajo.Vehiculo.GetListaMarcas();
+            vehiculo.listaModelosAutos = _contenedorTrabajo.Vehiculo.GetListaModelos();
+            vehiculo.listaMunicipios = _contenedorTrabajo.Vehiculo.GetListaMunicipios();
+            vehiculo.listaOficinas = _contenedorTrabajo.Oficina.GetListaOficinas();
+
+            vehiculo.FechaRegistroAgencia = DateTime.Now;
+            vehiculo.NuevoRegistro = false;
+
             foreach (var obj in vehiculo.listaVehiculos) {
 
               string dato =   obj.AnioModeloVehiculo.Descripcion;
@@ -41,7 +52,18 @@ namespace AIVA.Web.Areas.Admin.Controllers
         [HttpGet]
         public IActionResult Resultados()
         {
-            return View();
+            VehiculoViewModel vehiculo = new VehiculoViewModel();
+            vehiculo.VehiculosReportados = _contenedorTrabajo.Vehiculo.GetReportesVehiculos();
+            return View(vehiculo);
+        }
+
+
+        [HttpGet]
+        public IActionResult CincoDigitos()
+        {
+            VehiculoViewModel vehiculo = new VehiculoViewModel();
+            vehiculo.VehiculosReportados = _contenedorTrabajo.Vehiculo.GetReportesVehiculos();
+            return View(vehiculo);
         }
 
         [HttpGet]
@@ -155,11 +177,47 @@ namespace AIVA.Web.Areas.Admin.Controllers
         }
 
         [HttpGet]
-        public IActionResult Edit(int id)
+        public IActionResult EditarBitacora(int id)
         {
-            VehiculoViewModel vehiculo = new VehiculoViewModel();
-            return View(vehiculo);
+            
+            AIVA.Modelos.Models.Vehiculo resultado = _contenedorTrabajo.Vehiculo.GetVehiculoById(id);
+
+            if (resultado != null)
+                return Json(new { Data = resultado });
+            else
+                return Json(new { Data = "" });
+                        
         }
+
+
+        [HttpGet]
+        public IActionResult DictamenEdicion(int id)
+        {
+
+            AIVA.Modelos.Models.Vehiculo resultado = _contenedorTrabajo.Vehiculo.GetVehiculoById(id);
+
+            if (resultado != null)
+                return Json(new { Data = resultado });
+            else
+                return Json(new { Data = "" });
+
+        }
+
+
+
+        [HttpGet]
+        public IActionResult DictamenRegistroNuevo(int id)
+        {
+
+            AIVA.Modelos.Models.Vehiculo resultado = _contenedorTrabajo.Vehiculo.GetVehiculoById(id);
+
+            if (resultado != null)
+                return Json(new { Data = resultado });
+            else
+                return Json(new { Data = "" });
+
+        }
+
 
         [HttpPost]
         public IActionResult Edit(VehiculoViewModel model)

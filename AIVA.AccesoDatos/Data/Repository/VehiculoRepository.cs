@@ -227,5 +227,18 @@ namespace AIVA.AccesoDatos.Data.Repository
             }
         }
 
+        public List<ReporteVehiculo> GetReportesVehiculos() {
+            try
+            {
+
+                var ListadoVehiculosReportados = _db.ReporteVehiculo.ToList();
+                return ListadoVehiculosReportados;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                return new List<ReporteVehiculo>();
+            }
+        } 
     }
 }
